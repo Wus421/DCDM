@@ -44,7 +44,7 @@ model:
 
 
 train:
-  seed: 2023
+  seed: 2025
   batch_size: 8
   num_workers: 8
   pin_memory: True
