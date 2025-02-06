@@ -61,9 +61,9 @@ model:
 
 
 train:
-  seed: 2023
-  batch_size: 1
-  num_workers: 1
+  seed: 2025
+  batch_size: 8
+  num_workers: 8
   pin_memory: True
   max_iters: 20000000
   val_freq: 10000
