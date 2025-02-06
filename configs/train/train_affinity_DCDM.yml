@@ -67,6 +67,7 @@ train:
 
 transform:
   use_mask_node: True
+  use_mask_edge: True
 
 
 data:
