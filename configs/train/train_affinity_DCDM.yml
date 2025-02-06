@@ -24,6 +24,12 @@ model:
   sync_twoup: False
   name: diffusion
   node_dim: 128
+  edge_dim: 64
+  denoiser:
+    backbone: NodeEdgeNet
+    num_blocks: 6
+    cutoff: 15
+    use_gate: True
   diff:
     num_timesteps: 1000
     time_dim: 10
@@ -41,6 +47,17 @@ model:
       scale_start: 0.9999
       scale_end: 0.0001
       width: 3
+    diff_bond:
+      init_prob: absorb
+      beta_schedule: segment
+      time_segment: [600, 400]
+      segment_diff: 
+        - scale_start: 0.9999
+          scale_end: 0.001
+          width: 3
+        - scale_start: 0.001
+          scale_end: 0.0001
+          width: 2
 
 
 train:
