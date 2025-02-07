@@ -2,10 +2,10 @@ import torch
 import numpy as np
 from torch_geometric.transforms import Compose
 from scipy.special import softmax
-from datasets.pl_data import ProteinLigandData
+from pldatasets.pl_data import ProteinLigandData
 from models.transition import *
 from utils.misc import *
-from utils.evaluations import atom_num
+from utils.evaluation import atom_num
 
 
 class FeaturizeMol(object):
@@ -206,8 +206,6 @@ def make_data_placeholder(n_graphs, data, device=None, max_size=None):
 
 def make_data_placeholder_frag(n_graphs, min_num_atom, start_linker, data, device=None, max_size=None):
     
-    nodes_dist = np.random.normal(24.923464980477522, 5.516291901819105, size=n_graphs)
-    nodes_dist = np.array([i.astype(int) for i in nodes_dist])
     pocket_size = atom_num.get_space_size(data.protein_pos.detach().cpu().numpy())
     nodes_dist = np.array([atom_num.sample_atom_num(pocket_size).astype(int) for _ in range(n_graphs)])
     
@@ -290,15 +288,6 @@ def make_data_placeholder_frag(n_graphs, min_num_atom, start_linker, data, devic
         frag_mask_batch_edge = frag_mask_batch_edge.to(device)
         node_type_batch = node_type_batch.to(device)
         node_pos_batch = node_pos_batch.to(device)
-        # atom_type = torch.zeros(n_particles, num_atom)
-        # pos = torch.zeros(n_particles, 3)
-        # rows, cols = [], []
-        # adj = get_adj_matrix(n_particles + num_node_frag)
-
-        # num_node = torch.tensor([n_particles + num_node_frag])
-        # ligand_bond_type = torch.ones(adj.size(1), dtype=torch.long) * 2
-    
-    # n_nodes_list = np.random.randint(15, 50, n_graphs)
     
 
     return {
@@ -315,17 +304,14 @@ def make_data_placeholder_frag(n_graphs, min_num_atom, start_linker, data, devic
     
 def make_data_placeholder_frag_x(n_graphs, min_num_atom, start_linker, data, device=None, max_size=None, x_id=None):
     
-    nodes_dist = np.random.normal(40.923464980477522, 5.516291901819105, size=n_graphs)
-    nodes_dist = np.array([i.astype(int) for i in nodes_dist])
-    # pocket_size = atom_num.get_space_size(data.protein_pos.detach().cpu().numpy())
-    # nodes_dist = np.array([atom_num.sample_atom_num(pocket_size).astype(int) for _ in range(n_graphs)])
+    pocket_size = atom_num.get_space_size(data.protein_pos.detach().cpu().numpy())
+    nodes_dist = np.array([atom_num.sample_atom_num(pocket_size).astype(int) for _ in range(n_graphs)])
     
     num_node_frag = 0
     if start_linker is not None:
         print('linker atom number:', len(start_linker['element']))
         num_node_frag = len(start_linker['element'])
     nodesxsample = [i - num_node_frag if (i - num_node_frag) > min_num_atom else min_num_atom for i in nodes_dist.tolist()]
-    print(nodesxsample)
     frag_mask_batch_node = []
     node_type_batch = []
     node_pos_batch = []
@@ -407,15 +393,7 @@ def make_data_placeholder_frag_x(n_graphs, min_num_atom, start_linker, data, dev
         frag_mask_batch_edge = frag_mask_batch_edge.to(device)
         node_type_batch = node_type_batch.to(device)
         node_pos_batch = node_pos_batch.to(device)
-        # atom_type = torch.zeros(n_particles, num_atom)
-        # pos = torch.zeros(n_particles, 3)
-        # rows, cols = [], []
-        # adj = get_adj_matrix(n_particles + num_node_frag)
 
-        # num_node = torch.tensor([n_particles + num_node_frag])
-        # ligand_bond_type = torch.ones(adj.size(1), dtype=torch.long) * 2
-    
-    # n_nodes_list = np.random.randint(15, 50, n_graphs)
     return {
         # 'n_graphs': n_graphs,
         'frag_mask_batch_node': frag_mask_batch_node,

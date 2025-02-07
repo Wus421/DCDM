@@ -7,7 +7,7 @@ import numpy as np
 from scipy import spatial as sci_spatial
 import matplotlib.pyplot as plt
 
-from utils.evaluations import eval_bond_length_config
+from utils.evaluation import eval_bond_length_config
 import utils.data as utils_data
 
 BondType = Tuple[int, int, int]  # (atomic_num, atomic_num, bond_type)

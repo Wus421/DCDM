@@ -13,7 +13,7 @@ from rdkit.Chem import AllChem, Descriptors, Crippen, Lipinski
 from rdkit.Chem.QED import qed
 from utils.sascorer import compute_sa_score
 # from utils.dataset import get_dataset
-from datasets import get_dataset
+from pldatasets import get_dataset
 from rdkit.Chem.FilterCatalog import *
 # from utils.visualize import show_mols, show
 # from utils.reconstruct import reconstruct_from_generated_with_edges

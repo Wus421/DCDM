@@ -2,7 +2,7 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 
-from datasets.pl_data import ProteinLigandData
+from pldatasets.pl_data import ProteinLigandData
 from utils import data as utils_data
 
 AROMATIC_FEAT_MAP_IDX = utils_data.ATOM_FAMILIES_ID['Aromatic']
