@@ -103,7 +103,7 @@ class PocketLigandPairDataset(Dataset):
                     data.smiles = smiles
                     data.mol_id = i
                     data.rmsd = rmsd
-                    data.vina_sorce = 1
+                    data.vina_sorce = vina_sorce
                     data = data.to_dict()  # avoid torch_geometric version issue
                     txn.put(
                         key=str(i).encode(),
