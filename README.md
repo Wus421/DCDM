@@ -1,5 +1,6 @@
 # DCDM
-![image](https://github.com/user-attachments/assets/c21e29fc-df4d-4bbf-baf8-3a49021f4494)
+<img width="641" height="499" alt="image" src="https://github.com/user-attachments/assets/b474d3eb-4bb7-41dc-a24d-d880338eebcc" />
+
 
 # Environment Installation
 Before you run DCDM, please follow the instructions I've included below to build the correct operating environment.
